@@ -30,6 +30,45 @@ namespace UDP_Asynchronous_Chat
                 SocketType.Dgram,
                 ProtocolType.Udp
                 );
+
+            mSocketBroadcastSender.EnableBroadcast = true;
+        }
+
+        public void SendBroadcast(string strDataForBroadcast)
+        {
+            if (string.IsNullOrEmpty(strDataForBroadcast))
+            {
+                return;
+            }
+            try
+            {
+                if (!mSocketBroadcastSender.IsBound)
+                {
+                    mSocketBroadcastSender.Bind(mIPEPLocal);
+                }
+                var dataBytes = Encoding.ASCII.GetBytes(strDataForBroadcast); // coverting string to byte[]
+
+                SocketAsyncEventArgs saea = new SocketAsyncEventArgs();
+
+                //need to convert string into byte[] to broadcast it
+                saea.SetBuffer(dataBytes, 0, dataBytes.Length);
+                saea.RemoteEndPoint = mIPEBroadcast;
+
+                saea.Completed += SenndCompletedCallBack;
+
+                mSocketBroadcastSender.SendToAsync(saea);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw;
+            }
+        }
+
+        private void SenndCompletedCallBack(object sender, SocketAsyncEventArgs e)
+        {
+            Console.WriteLine($"Data sent succesfully to : {e.RemoteEndPoint}");
         }
     }
 }

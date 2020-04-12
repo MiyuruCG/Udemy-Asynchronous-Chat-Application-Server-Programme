@@ -10,3 +10,4 @@ C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\obj\Debug\UDP Cha
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\bin\Debug\UDP Asynchronous Chat.dll
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\bin\Debug\UDP Asynchronous Chat.pdb
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csproj.CopyComplete
+C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\obj\Debug\UDP_Chat_Server_Form.Form1.resources

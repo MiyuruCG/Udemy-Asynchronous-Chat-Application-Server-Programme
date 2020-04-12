@@ -80,9 +80,22 @@ namespace UDP_Asynchronous_Chat
             }
         }
 
+
         private void ReceiveCompletedCallBack(object sender, SocketAsyncEventArgs e)
         {
-            throw new NotImplementedException();
+            //  SocketAsyncEventArgs e :: contains the data someone sends to the socket (stores inside the buffer)
+            // e.bytetransferd  :: how many bytes were transfered
+
+            string textReceived = Encoding.ASCII.GetString(e.Buffer, 0, e.BytesTransferred); // convert the bytes into string 
+            Console.WriteLine(
+                $"Text Received {textReceived}{Environment.NewLine}" + 
+                $"Number of bytes Received : {e.BytesTransferred}{Environment.NewLine}" + 
+                $"Received data from endpoint : {e.RemoteEndPoint}{Environment.NewLine}"
+                );
+
+            //to receive more data need to call the function again:: 
+            startReceivingData();
+
         }
     }
 }

@@ -13,6 +13,7 @@ namespace UDP_Asynchronous_Chat
         //
         Socket mSockBroadcastReciver;
         IPEndPoint mIPEPLocal;
+        private int retryCount;
 
         public UDPAshynchronousChatServer()
         {
@@ -28,6 +29,60 @@ namespace UDP_Asynchronous_Chat
             //the socket will use port 23000
 
             mSockBroadcastReciver.EnableBroadcast = true;
+        }
+
+        //
+        public void startReceivingData()
+        {
+            try
+            {
+                SocketAsyncEventArgs saea = new SocketAsyncEventArgs();
+                saea.SetBuffer(new byte[1024], 0, 1024);  // memory allocated in this metord will contain the data when the callback function is called
+                //1: allocate memory by passing a byte array
+                //2: statring point of the data allocation in the array 
+                //3: length of available space of the buffer (cannot be > allocated memory of the buffer) (65,507 max val)
+
+                //remote endpoint property
+                saea.RemoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+                //bind the socket to the local endpoint
+                if (!mSockBroadcastReciver.IsBound)  //check if it is already bound or not
+                {
+                    mSockBroadcastReciver.Bind(mIPEPLocal);
+                }
+
+                //populate the completed property of this socket object
+                //create a callback methord
+                // ' += ' assign a callback methord
+                saea.Completed += ReceiveCompletedCallBack;
+
+                //check if the return value is fales 
+                if (!mSockBroadcastReciver.ReceiveFromAsync(saea))
+                {
+                    Console.WriteLine($"Failed to receive data - sock error: {saea.SocketError}");
+                    // ' $ ' string interpolation:   new way to concatenate the string ( '+' = '$' )
+
+                    //re run the methor for 10 times
+                    if (retryCount++ >= 10)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        startReceivingData();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                throw;
+            }
+        }
+
+        private void ReceiveCompletedCallBack(object sender, SocketAsyncEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

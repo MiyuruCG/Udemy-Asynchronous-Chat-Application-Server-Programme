@@ -11,3 +11,16 @@ C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\bin\Debug\UDP Asy
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\bin\Debug\UDP Asynchronous Chat.pdb
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csproj.CopyComplete
 C:\git\GitHub\Udemy\UDP Asynchronous Chat\UDP Chat Server Form\obj\Debug\UDP_Chat_Server_Form.Form1.resources
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\bin\Debug\UDP Chat Server Form.exe.config
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\bin\Debug\UDP Chat Server Form.exe
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\bin\Debug\UDP Chat Server Form.pdb
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\bin\Debug\UDP Asynchronous Chat.dll
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\bin\Debug\UDP Asynchronous Chat.pdb
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csprojAssemblyReference.cache
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP_Chat_Server_Form.Form1.resources
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP_Chat_Server_Form.Properties.Resources.resources
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csproj.GenerateResource.cache
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csproj.CoreCompileInputs.cache
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.csproj.CopyComplete
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.exe
+C:\git\GitHub\Udemy\UDP Socket Programming For DC in C# .NET\Asynchronous\Udemy-Asynchronous-Chat-Application-Server-Programme\UDP Chat Server Form\obj\Debug\UDP Chat Server Form.pdb

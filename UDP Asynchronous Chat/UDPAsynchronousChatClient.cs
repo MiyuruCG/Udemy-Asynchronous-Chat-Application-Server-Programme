@@ -107,13 +107,15 @@ namespace UDP_Asynchronous_Chat
             if (e.BytesTransferred == 0)
             {
                 Debug.WriteLine($"Zero bytes transferred, socket error: {e.SocketError}");
+                return; 
             }
 
             var receivedText = Encoding.ASCII.GetString(e.Buffer, 0, e.BytesTransferred);
             //e.Buffer = contains the received data
             //e.BytesTransferred = contains the size
+            var expectedText = Convert.ToString(e.UserToken);
 
-            if (receivedText.Equals(Convert.ToString(e.UserToken)))
+            if (receivedText.Equals(expectedText))
             {
                 Console.WriteLine($"Received confirmation from server : {e.RemoteEndPoint}");
 
@@ -123,9 +125,16 @@ namespace UDP_Asynchronous_Chat
                 //now we are connected to the server and need to receive more data from the server...
                 ReceiveTextFromServer(string.Empty, mChatServerEP as IPEndPoint); 
             }
-            else
+            else if(string.IsNullOrEmpty(expectedText) && 
+                !string.IsNullOrEmpty(receivedText))//userToken empty : server is sending a messagge from another client
             {
-                Console.WriteLine("Ecpected text not received.");
+                Console.WriteLine($"text received: {receivedText}");
+                ReceiveTextFromServer(string.Empty, mChatServerEP as IPEndPoint);
+            }
+            else if( !string.IsNullOrEmpty(expectedText) &&
+                !receivedText.Equals(expectedText))//a server receives the <DISCOVER> message but sends a message that client didnt expected ~~ this means that the server is not what we wanted
+            {
+                Console.WriteLine($"Expected token not returned by the server.");
             }
 
         }
@@ -136,6 +145,7 @@ namespace UDP_Asynchronous_Chat
             {
                 if (string.IsNullOrEmpty(message))
                 {
+                    Console.WriteLine("String is empty....");
                     return;
                 }
 
@@ -159,6 +169,7 @@ namespace UDP_Asynchronous_Chat
                 Console.WriteLine(e.ToString());
             }
         }
+
 
         private void SendMessageToKnownServerCompoletedCallback(object sender, SocketAsyncEventArgs e)
         {

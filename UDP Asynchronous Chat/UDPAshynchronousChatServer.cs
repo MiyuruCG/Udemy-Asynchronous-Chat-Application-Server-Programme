@@ -10,7 +10,7 @@ namespace UDP_Asynchronous_Chat
 {
     public class UDPAshynchronousChatServer
     {
-        //
+        
         Socket mSockBroadcastReciver;
         IPEndPoint mIPEPLocal;
         private int retryCount;
@@ -109,6 +109,19 @@ namespace UDP_Asynchronous_Chat
                 //conformation packet for the sender
                 SendTextToEndPoint("<CONFIRM>", e.RemoteEndPoint);// so now the sender will bw able to save the serves endpoint and send specific messages here without broadcasting 
 
+            }
+            else
+            {
+                foreach (IPEndPoint remEP in mListOfClients)
+                {
+                    if (!remEP.Equals(e.RemoteEndPoint)) //to not to send the message to the sender
+                    {
+                        SendTextToEndPoint(textReceived, remEP);
+                        //received text from client
+                        //remEP : the Endpoint of the receving client
+                    }
+
+                }
 
             }
 

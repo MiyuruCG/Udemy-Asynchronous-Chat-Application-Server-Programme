@@ -15,6 +15,8 @@ namespace UDP_Asynchronous_Chat
         IPEndPoint mIPEPLocal;
         private int retryCount;
 
+        List<EndPoint> mListOfClients;
+
         public UDPAshynchronousChatServer()
         {
             mSockBroadcastReciver =
@@ -29,6 +31,7 @@ namespace UDP_Asynchronous_Chat
             //the socket will use port 23000
 
             mSockBroadcastReciver.EnableBroadcast = true;
+            mListOfClients = new List<EndPoint>();
         }
 
         //
@@ -93,9 +96,52 @@ namespace UDP_Asynchronous_Chat
                 $"Received data from endpoint : {e.RemoteEndPoint}{Environment.NewLine}"
                 );
 
+            //to add clients into the list
+            if (textReceived.Equals("<DISCOVER>"))
+            {
+                //check if the list already has the clients endpoint 
+                if (!mListOfClients.Contains(e.RemoteEndPoint))
+                {
+                    mListOfClients.Add(e.RemoteEndPoint);
+                    Console.WriteLine($"Total Clients : {mListOfClients.Count}");
+
+                }
+                //conformation packet for the sender
+                SendTextToEndPoint("<CONFIRM>", e.RemoteEndPoint);// so now the sender will bw able to save the serves endpoint and send specific messages here without broadcasting 
+
+
+            }
+
             //to receive more data need to call the function again:: 
             startReceivingData();
 
+        }
+
+        private void SendTextToEndPoint(string textToSend, EndPoint remoteEndPoint)
+        {
+
+            if (string.IsNullOrEmpty(textToSend) || remoteEndPoint == null)
+            {
+                return;
+            }
+            SocketAsyncEventArgs saeaSend = new SocketAsyncEventArgs();
+            saeaSend.RemoteEndPoint = remoteEndPoint;
+
+            //convert the string to bytes so that it can be sent through the socket
+            var bytesToSend = Encoding.ASCII.GetBytes(textToSend);
+
+            saeaSend.SetBuffer(bytesToSend, 0, bytesToSend.Length);
+
+            //if sending is completed calls this callback methord to inform that the task is compoleted
+            saeaSend.Completed += SendTextToEndpointCompleted;
+
+            mSockBroadcastReciver.SendAsync(saeaSend);
+
+        }
+
+        private void SendTextToEndpointCompleted(object sender, SocketAsyncEventArgs e)
+        {
+            Console.WriteLine($"Completed sending text to {e.RemoteEndPoint}");
         }
     }
 }

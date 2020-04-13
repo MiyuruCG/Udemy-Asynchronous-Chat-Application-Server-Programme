@@ -14,7 +14,7 @@ namespace UDP_Asynchronous_Chat
         Socket mSocketBroadcastSender;
         IPEndPoint mIPEBroadcast;
         IPEndPoint mIPEPLocal; // to represent the local machine
-        int a;
+        
         public UDPAsynchronousChatClient(int _localPort, int _remotePort)
         {
             // para 1 : used to receive data

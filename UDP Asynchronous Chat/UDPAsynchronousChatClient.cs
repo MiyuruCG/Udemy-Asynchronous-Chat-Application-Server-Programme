@@ -129,5 +129,40 @@ namespace UDP_Asynchronous_Chat
             }
 
         }
+
+        public void SendMessageToKnownServer(string message)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(message))
+                {
+                    return;
+                }
+
+                //byte array to store the coverted string
+                var bytesToSend = Encoding.ASCII.GetBytes(message);
+
+                SocketAsyncEventArgs saea = new SocketAsyncEventArgs();
+                saea.SetBuffer(bytesToSend, 0, bytesToSend.Length);
+
+                //mChatServerEP = when we send a broadcast the recived server's Endpoint. This will be sent through the callback function
+                saea.RemoteEndPoint = mChatServerEP;
+
+                saea.UserToken = message;
+
+                saea.Completed += SendMessageToKnownServerCompoletedCallback;
+
+                mSocketBroadcastSender.SendToAsync(saea);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        private void SendMessageToKnownServerCompoletedCallback(object sender, SocketAsyncEventArgs e)
+        {
+            Console.WriteLine($"Sent: {e.UserToken}{Environment.NewLine}Server: {e.RemoteEndPoint}");
+        }
     }
 }
